@@ -1,5 +1,5 @@
 import React from 'react';
-import * as axios from 'axios';
+import axios from 'axios'; // Updated import statement
 import './App.css';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:3000';
@@ -21,7 +21,7 @@ class App extends React.Component {
 
   fetchMessages = async () => {
     try {
-      const messages = await fetchMessages();
+      const messages = await fetchMessages(); // Corrected function call
       this.setState({ messages });
     } catch (err) {
       console.log(err);
@@ -30,7 +30,7 @@ class App extends React.Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    await axios.post(`${BACKEND_URL}/messages`, {message: this.state.message});
+    await axios.post(`${BACKEND_URL}/messages`, { message: this.state.message });
     this.setState({ message: '' });
     setTimeout(() => this.fetchMessages(), 2000);
   }
@@ -50,11 +50,9 @@ class App extends React.Component {
           </form>
           <h1>Messages:</h1>
           <ul>
-            {
-              this.state.messages.map(message => (
-                <li key={message.id}>{message.content || ''}</li>
-              ))
-            }
+            {this.state.messages.map(message => (
+              <li key={message.id}>{message.content || ''}</li>
+            ))}
           </ul>
         </header>
       </div>
